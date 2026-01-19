@@ -1,6 +1,6 @@
-const celdas = document.querySelectorAll('.celda');
+const celdas = document.querySelectorAll('.celda-juego');
 let jugadorActual = "X";
-let tablero = ['','','','','','','','',''];
+let tablero = ['', '', '', '', '', '', '', '', ''];
 let juego = true;
 
 const formasGanar = [
@@ -17,11 +17,13 @@ const formasGanar = [
 function ganar() {
     for (let forma of formasGanar) {
         const [a, b, c] = forma;
+        
         if (tablero[a] && tablero[a] === tablero[b] && tablero[a] === tablero[c]) {
             juego = false;
             return tablero[a];
         }
     }
+
     if (!tablero.includes('')) {
         juego = false;
         return 'Empate';
@@ -30,23 +32,24 @@ function ganar() {
 }
 
 function resultados(resultado) {
-    const contenedorEstado = document.getElementById("contenedor-estado");
-    const estado = document.getElementById("estado");
-    const progreso = document.getElementById("estado-progreso");
+    const contenedorEstado = document.getElementById("notificacion-estado");
+    const estado = document.getElementById("mensaje-estado");
+    const progreso = document.getElementById("barra-progreso");
+
     if (resultado === 'Empate') {
-        estado.textContent = 'Es un empate';
-        progreso.style.background = 'linear-gradient(to right, #ff6666 50%, #00BFFF 100%)';
+        estado.textContent = '¡Es un empate!';
+        progreso.style.background = 'linear-gradient(to right, var(--rojo-suave) 50%, var(--azul-claro) 100%)';
     } else if (resultado === 'X') {
-        estado.textContent = 'X Gana!';
-        progreso.style.background = 'linear-gradient(to right, #ff6666, #ff6666)';
+        estado.textContent = '¡X Gana!';
+        progreso.style.background = 'var(--rojo-suave)';
     } else if (resultado === 'O') {
-        estado.textContent = 'O Gana!';
-        progreso.style.background = 'linear-gradient(to right, #00BFFF, #00BFFF)';
-    } 
-    
-    contenedorEstado.classList.add('mostrar');
+        estado.textContent = '¡O Gana!';
+        progreso.style.background = 'var(--azul-claro)';
+    }
+
+    contenedorEstado.classList.add('visible');
     setTimeout(() => {
-        contenedorEstado.classList.remove('mostrar');
+        contenedorEstado.classList.remove('visible');
     }, 3000);
 }
 
@@ -54,8 +57,10 @@ function marcarJugador(index) {
     if (juego && tablero[index] === '') {
         tablero[index] = jugadorActual;
         celdas[index].textContent = jugadorActual;
-        celdas[index].classList.add(jugadorActual);
+        celdas[index].classList.add(jugadorActual === 'X' ? 'equis' : 'circulo');
+        
         const ganador = ganar();
+        
         if (ganador) {
             resultados(ganador);
         } else {
@@ -65,12 +70,15 @@ function marcarJugador(index) {
 }
 
 function reiniciar() {
-    tablero = ['','','','','','','','',''];
+    tablero = ['', '', '', '', '', '', '', '', ''];
     jugadorActual = 'X';
     juego = true;
+
     celdas.forEach(celda => {
-        celda.textContent = ''
-        celda.classList.remove('X', 'O');
+        celda.textContent = '';
+        celda.classList.remove('equis', 'circulo');
     });
-    document.getElementById('estado').textContent = '';
+
+    const mensajeEstado = document.getElementById('mensaje-estado');
+    if (mensajeEstado) mensajeEstado.textContent = '';
 }
