@@ -1,4 +1,4 @@
-# tic-tac-toe
+# juego-tic-tac-toe
 
 ## 📌 Descripción
 Este proyecto forma parte de mi portafolio personal.  
