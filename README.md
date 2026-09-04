@@ -1,10 +1,7 @@
 # juego-tic-tac-toe
 
-## 📌 Descripción
-Este proyecto forma parte de mi portafolio personal.  
-El objetivo es demostrar buenas prácticas de programación, organización y documentación en GitHub.  
-El proyecto se mejoró visualmente usando el modelo de IA Gemini 3 Flash de Antigravity.
+Juego del tres en raya en el que dos jugadores alternan turnos para colocar sus fichas e intentar alinear tres en línea.
 
-## 📜 Licencia
+## Licencia
 Este proyecto está bajo la licencia **MIT**.  
 Consulta el archivo [LICENSE](LICENSE) para más detalles.
